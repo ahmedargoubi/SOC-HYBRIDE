@@ -26,9 +26,10 @@ Côté cloud, le sous-réseau privé **security-a** (`10.20.3.0/24`) accueillera
 
 ### Topologie complète
 
+
 ![Architecture](architecture.png)
 
-📄 Détails : [`docs/architecture-overview.md`](docs/architecture-overview.md) · [`docs/network-topology.md`](docs/network-topology.md)
+
 
 ---
 
