@@ -118,7 +118,7 @@ La **segmentation par zone de confiance** est le premier principe : chaque zone 
 
 ## 🗺️ Structure du dépôt
 
-À la racine se trouve ce `README.md`. Le dossier `docs/` contient la vue d'ensemble de l'architecture (`architecture-overview.md`), la topologie réseau (`network-topology.md`) et les principes de sécurité (`security-principles.md`). Le dossier `config/` contient un guide par sujet : `opnsense-interfaces-segmentation.md`, `opnsense-aliases-and-rules.md`, `opnsense-mfa.md`, `security-core-ssh-mfa.md`, `velociraptor.md`, `active-directory.md` et `domain-join-client.md`. Le schéma d'architecture se trouve dans `network/diagrams/architecture.png`, et les captures d'écran de chaque guide sont rangées dans `images/<nom-du-guide>/`, sous la forme `NN-nom-court.png`.
+À la racine se trouvent ce `README.md` et le schéma d'architecture `architecture.png`, placé dans le même dossier. Le dossier `docs/` contient la vue d'ensemble de l'architecture (`architecture-overview.md`), la topologie réseau (`network-topology.md`) et les principes de sécurité (`security-principles.md`). Le dossier `config/` contient un guide par sujet : `opnsense-interfaces-segmentation.md`, `opnsense-aliases-and-rules.md`, `opnsense-mfa.md`, `security-core-ssh-mfa.md`, `velociraptor.md`, `active-directory.md` et `domain-join-client.md`. Les captures d'écran de chaque guide sont rangées dans `images/<nom-du-guide>/`, sous la forme `NN-nom-court.png`.
 
 ---
 
