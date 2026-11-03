@@ -27,7 +27,7 @@ Côté cloud, le sous-réseau privé **security-a** (`10.20.3.0/24`) accueillera
 ### Topologie complète
 
 
-![Architecture](architecture.png)
+![Architecture](./architecture.png)
 
 
 
