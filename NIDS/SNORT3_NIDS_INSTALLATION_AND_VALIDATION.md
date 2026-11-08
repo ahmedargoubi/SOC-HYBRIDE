@@ -1,68 +1,16 @@
 # Snort 3 NIDS — Installation, Configuration and Validation
 
-**Project:** Hybrid Enterprise Cybersecurity Architecture with AI-Assisted SOC Triage (PFE, TEK-UP)
-**Component:** Independent passive Network Intrusion Detection System (Snort 3) fed by OPNsense packet mirroring
-**Lab:** VMware Workstation — OPNsense firewall + Ubuntu 24.04 "Security-Core" VM
-**Document date:** 2026-11-08
-
----
-
-## How to read this document
-
-Every command block in this document carries a status label, so a reader can tell what was actually done from what is only suggested.
-
-| Label | Meaning |
-|---|---|
-| ✅ **Executed** | The command was run on the lab machine and reported as successful in the project record supplied by the team. |
-| 🔁 **Re-run to verify** | A read-only command for checking the current state. It is **not** claimed to have been run historically unless a figure says so. |
-| 🧩 **Optional / future** | Not implemented. Shown only as a possible next step. |
-| ❓ **Needs confirmation** | A detail that could not be established from the supplied evidence and must be checked on the real machine. |
-
-Evidence is referenced as **Figure N** (see [Section 12](#12-evidence-and-screenshots)). A statement is only called "confirmed by screenshot" when a figure in this repository shows it.
-
-> **Two findings the reader should know up front**
-> 1. **`ens41` currently has an IPv4 address (`192.168.15.2/24`)** in Figure 2, although the design requires no IP on the monitoring interface. See [Section 9.4](#94-known-discrepancy-ens41-has-an-ip-address).
-> 2. **Persistence after reboot has not been proven**, either on OPNsense (mirror graph) or on Ubuntu (Snort start). See [Section 14](#14-current-status-limitations-and-next-steps).
-
----
-
-## Table of Contents
-
-1. [Introduction and objectives](#1-introduction-and-objectives)
-2. [Architecture and network topology](#2-architecture-and-network-topology)
-3. [Prerequisites](#3-prerequisites)
-4. [Snort 3 and LibDAQ installation](#4-snort-3-and-libdaq-installation)
-5. [Snort configuration](#5-snort-configuration)
-6. [Community and local rules](#6-community-and-local-rules)
-7. [OPNsense Netgraph packet mirroring](#7-opnsense-netgraph-packet-mirroring)
-8. [OPNsense persistence](#8-opnsense-persistence)
-9. [Ubuntu monitoring interface persistence](#9-ubuntu-monitoring-interface-persistence)
-10. [End-to-end testing](#10-end-to-end-testing)
-11. [Verification commands](#11-verification-commands)
-12. [Evidence and screenshots](#12-evidence-and-screenshots)
-13. [Troubleshooting](#13-troubleshooting)
-14. [Current status, limitations and next steps](#14-current-status-limitations-and-next-steps)
-15. [Future integration with Wazuh and AI-assisted SOC triage](#15-future-integration-with-wazuh-and-ai-assisted-soc-triage)
-16. [References](#16-references)
-17. [Final verification checklist](#17-final-verification-checklist)
 
 ---
 
 ## 1. Introduction and objectives
 
-### 1.1 Context
 
-The project builds a hybrid SOC: an on-premises network (OPNsense, Active Directory, Windows/Linux endpoints, Velociraptor, Snort) connected to an AWS VPC hosting Wazuh, TheHive, Cortex, MISP and a public honeypot. Wazuh is the SIEM; an AI-assisted triage layer is planned on top.
-
-Figure 0 shows the overall project architecture (it is the project-level diagram, not a Snort-specific one — it does not draw the mirror link described below).
-
-![Figure 0 — Project architecture overview](images/fig00-project-architecture-overview.png)
-
-### 1.2 Why a separate Snort sensor
+### 1.1 Why a separate Snort sensor
 
 OPNsense already routes and filters traffic. The team chose to monitor traffic **independently of the firewall**, on a dedicated VM, so that detection does not depend on the device being monitored. Snort runs on a separate Ubuntu VM. **Suricata on OPNsense is not used as a replacement for this sensor.**
 
-### 1.3 Objectives
+### 1.2 Objectives
 
 | # | Objective | Status |
 |---|---|---|
@@ -74,7 +22,7 @@ OPNsense already routes and filters traffic. The team chose to monitor traffic *
 | O6 | Make the setup survive reboots | **Scripts and units exist; reboot behaviour not proven** |
 | O7 | Forward alerts to Wazuh and AI triage | **Not implemented** |
 
-### 1.4 Scope statement
+### 1.3 Scope statement
 
 Snort here is a **passive IDS**. It observes copies of packets and writes alerts. It does **not** block traffic (it is not an IPS), and the only local rule is a **test rule** that proves packet visibility. This document does not claim broad attack-detection coverage.
 
