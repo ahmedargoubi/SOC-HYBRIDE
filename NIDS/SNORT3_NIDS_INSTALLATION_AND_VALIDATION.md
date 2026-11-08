@@ -140,23 +140,6 @@ sudo apt install -y build-essential cmake git autoconf libtool bison flex \
   libluajit-5.1-dev libssl-dev zlib1g-dev liblzma-dev libunwind-dev
 ```
 
-| Package | Why it is needed |
-|---|---|
-| `build-essential`, `cmake` | C/C++ compiler toolchain and the build system used by `configure_cmake.sh` |
-| `git` | Clone the LibDAQ and Snort 3 repositories |
-| `autoconf`, `libtool` | Generate/handle LibDAQ's autotools build (`./bootstrap`, `./configure`) |
-| `bison`, `flex` | Parser generators used while building |
-| `pkg-config` | Locates installed libraries during configuration |
-| `libpcap-dev` | Packet capture library (used by the pcap DAQ) |
-| `libpcre2-dev` | Regular-expression support for rule matching |
-| `libdumbnet-dev` | Network utility library required by Snort 3 |
-| `libhwloc-dev` | Hardware topology / CPU affinity support |
-| `libluajit-5.1-dev` | LuaJIT — Snort 3 configuration is written in Lua |
-| `libssl-dev` | TLS/crypto support |
-| `zlib1g-dev`, `liblzma-dev` | Decompression support (LZMA was reported ON) |
-| `libunwind-dev` | Stack unwinding for diagnostics (reported ON) |
-
-> ⚠ No screenshot of this step exists yet (checklist item 2).
 
 ### 4.2 Source directory — ✅ Executed
 
