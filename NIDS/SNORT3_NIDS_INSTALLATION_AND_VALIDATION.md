@@ -237,7 +237,7 @@ EXTERNAL_NET = '!$HOME_NET'
 
 Figure 5 shows both lines in the file (line 24 and line 28).
 
-![Figure 5](images/fig05-snort-config-dir-and-home-net.png)
+![Figure 5](screens/cap5.png)
 
 **Why `HOME_NET` must be the protected networks.** Rules use `$HOME_NET` and `$EXTERNAL_NET` to express direction ("traffic from outside to our servers"). If `HOME_NET` is wrong, rules written for "attacker → protected host" will not match, or will match the wrong side, producing missed detections or noise. Here it lists the four internal subnets (Server, User, Security, Target/DMZ).
 
